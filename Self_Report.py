@@ -8,6 +8,7 @@
 # 更新方式为，用一个没有填过每日一报的账户登录，然后在开发者工具中找到对应的节点，copy对应的xpath路径
 
 import time
+import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -44,8 +45,10 @@ for i in list:
     wait = WebDriverWait(browser,10)
     zhuxiao = wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="fineui_9-inputEl-icon"]')))
     zhuxiao.click()  # 点击住校
-    jiating = browser.find_element_by_xpath('//*[@id="fineui_12-inputEl-icon"]')
-    jiating.click()  # 点击不是家庭地址
+    wait = WebDriverWait(browser, 10)
+    jiating = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="fineui_12-inputEl-icon"]')))
+    jiating.click()  # 点击家庭
+
 
     # 下面代码很有可能因为版本更新而失效
     tijiao = browser.find_element_by_xpath('/html/body/form/div[5]/div/div[2]/div[2]/div/div/a[1]')
@@ -53,9 +56,10 @@ for i in list:
     wait = WebDriverWait(browser, 3)
     queren = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="fineui_36"]')))
     queren.click()  # 点击确认提交
-    print("等待提交10秒...")
+    print("等待提交10秒，用户为%s" % username)
     time.sleep(10)
-    print(browser.page_source)
+    result = re.findall('<div class="f-messagebox-message">(.*?)</div>', browser.page_source)
+    print(result)
     print("若出现提交成功则成功，否则失败")
     browser.close()
 
