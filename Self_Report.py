@@ -6,6 +6,7 @@
 
 # 每次版本更新时，需要更新节点数据
 # 更新方式为，用一个没有填过每日一报的账户登录，然后在开发者工具中找到对应的节点，copy对应的xpath路径
+# 使用前，请确保已经安装了chrome以及对应版本的chromedriver
 
 import time
 import re
@@ -15,7 +16,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # list用于存放用户账号和密码
-list=[['18124723', '200714cheN'], ['18124719', 'Ep921305'], ['18124722', 'SIMONzlx959'], ['18124610', 'LWh010202']]
+list=[['学号', '密码'], ['学号', '密码'], ['学号', '密码'], ['学号', '密码'], ['学号', '密码']]
 
 for i in list:
     username = i[0]
