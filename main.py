@@ -129,6 +129,6 @@ def login(self, number, password):
 
 
 init = Login()
-login(init, number='18124723', password='200714cheN')
+login(init, number='学号', password='密码')
 
 
